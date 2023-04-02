@@ -1,7 +1,7 @@
 import type { ITag } from '@/types/tag'
 
 export interface ITask {
-  id: number;
+  id?: number;
   tag: ITag['label'];
   value: string;
 }

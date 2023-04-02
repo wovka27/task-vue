@@ -1,18 +1,28 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { useTagsStore } from '@/stores'
+import { computed } from 'vue'
+import { useTagsStore, useTasksStore } from '@/stores'
 import type { ITask } from '@/types'
-const props = defineProps<{task: ITask}>()
+import { setTasks } from '@/services/storage'
+
+const props = defineProps<{ task: ITask }>()
+const emit = defineEmits(['update:tagValue'])
 
 const { tags } = useTagsStore()
-const tagSelect = ref<string>()
+const {tasks} = useTasksStore()
+const model = computed<string>({
+  get: () => props.task.tag,
+  set: (value) => {
+    emit('update:tagValue', value)
+    setTasks(tasks.value)
+  }
+})
 </script>
 <template>
-  <div v-if='task' class="TaskItem">
-    <el-select v-if='task.tag' v-model="tagSelect" class="TaskItem__tag">
+  <div v-if="task" class="TaskItem">
+    <el-select v-if="task.tag" v-model="model" class="TaskItem__tag">
       <el-option v-for="tag of tags" :key="tag.value" :value="tag.value" :label="tag.label" />
     </el-select>
-    <el-text class="TaskItem__text">{{task.value}}</el-text>
+    <el-text class="TaskItem__text" :class="{ noTag: !task.tag }">{{ task.value }}</el-text>
   </div>
 </template>
 

@@ -7,5 +7,7 @@ export interface ITagStore {
   $reset: Void
   deleteTag: (value: string) => void
   selectTag: ITagStore['deleteTag']
-  selectedTag: ComputedRef<ITag | undefined>
+  selectedTag: ComputedRef<Ref<ITag | undefined>>
+  getSelectedData: ITagStore['$reset']
+  clearSelectedTag: ITagStore['$reset']
 }
