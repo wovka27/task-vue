@@ -8,7 +8,7 @@ import {ElementPlusResolver} from "unplugin-vue-components/resolvers";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: import.meta.env.NODE_ENV !== 'production' ? '/' : '/task-vue/',
+  base: '/task-vue/',
   plugins: [
       vue(),
     AutoImport({
