@@ -23,8 +23,8 @@ const textRef = ref()
     ></el-button>
     <div class='TaskPreview__content'>
       <article ref='textRef'>
-        <p>{{weekday}}:</p>
         <ul v-if='tasks.length'>
+            <li>{{weekday}}:</li>
           <li v-for='task of tasks' :key='task.id'>- {{task.tag.split('').slice(1,task.tag.length - 1).join('')}}: {{task.value}}</li>
         </ul>
       </article>
@@ -39,16 +39,17 @@ const textRef = ref()
   height: 100%;
   border-radius: 8px;
   padding: 20px;
-
   @include shadow;
   background-color: $color-bg;
   color: lightgreen;
   &__content {
+    height: 100%;
     max-height: 250px;
     @include no-scroll-bar;
     overflow-y: auto;
   }
   &__btn {
+    @include shadow;
     position: absolute;
     top: 20px;
     right: 20px;

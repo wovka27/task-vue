@@ -15,7 +15,6 @@ declare module '@vue/runtime-core' {
     ElInput: typeof import('element-plus/es')['ElInput']
     ElOption: typeof import('element-plus/es')['ElOption']
     ElSelect: typeof import('element-plus/es')['ElSelect']
-    ElTag: typeof import('element-plus/es')['ElTag']
     ElText: typeof import('element-plus/es')['ElText']
     TagItem: typeof import('./src/components/TagItem.vue')['default']
     TagList: typeof import('./src/components/TagList.vue')['default']

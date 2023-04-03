@@ -45,7 +45,7 @@ watch(selectedTag, (value) => {
   <el-form :rules="rules" :model="form" class="TaskForm" @submit.prevent="submit(formRef)">
     <div class="TaskForm__inner-wrapper">
       <el-form-item required prop="input">
-        <el-input class="TaskForm__input" v-model="form.input" resize="none" :rows="10" type="textarea" />
+        <el-input class="TaskForm__input" v-model="form.input" resize="none" :rows="5" type="textarea" />
       </el-form-item>
       <el-button :disabled='!form.input.length' type="success" native-type="submit">Добавить</el-button>
     </div>

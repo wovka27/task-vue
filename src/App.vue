@@ -9,21 +9,29 @@ const cells = [TaskForm, TaskList, TagList, TaskPreview]
 
 <template>
   <div class="Grid">
-    <div v-for="(cell, index) of cells" :key="index" class="Grid__cell"><Component :is="cell" /></div>
+    <div v-for="(cell, index) of cells" :key="index" class="Grid__cell">
+      <Component :is="cell" />
+    </div>
   </div>
 </template>
 
 <style lang="scss">
 .Grid {
+  max-width: 700px;
+  margin: 0 auto;
   @include absolute-full;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(8, 1fr);
   grid-template-areas:
-    'ab ab bc bc'
-    'ab ab bc bc'
-    'ab ab bc bc'
-    'cd cd de de';
+    'bc'
+    'bc'
+    'bc'
+    'de'
+    'de'
+    'cd'
+    'ab'
+    'ab';
 
   &__cell {
     position: relative;
@@ -31,15 +39,19 @@ const cells = [TaskForm, TaskList, TagList, TaskPreview]
     height: 100%;
     padding: 10px;
     @include no-scroll-bar;
+
     &:nth-child(1) {
       grid-area: ab;
     }
+
     &:nth-child(2) {
       grid-area: bc;
     }
+
     &:nth-child(3) {
       grid-area: cd;
     }
+
     &:nth-child(4) {
       grid-area: de;
     }

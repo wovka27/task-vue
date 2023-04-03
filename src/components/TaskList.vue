@@ -2,13 +2,19 @@
 import TaskItem from '@/components/TaskItem.vue'
 import { useTasksStore } from '@/stores'
 
-const {tasks} = useTasksStore()
+const { tasks } = useTasksStore()
 </script>
 
 <template>
   <div class="TaskList">
     <div class="TaskList__main">
-      <TaskItem v-for='task of tasks' :key='task.id' :task='task' v-model:tag-value='task.tag'/>
+      <TaskItem
+        v-for="task of tasks"
+        :key="task.id"
+        :task="task"
+        v-model:tag-value="task.tag"
+        v-model:task-value="task.value"
+      />
     </div>
   </div>
 </template>

@@ -25,11 +25,11 @@ const click = () => {
 
 <template>
   <div class="TagList">
-    <div class="TagList__main">
+    <div class="TagList__main" v-grab-scroll>
       <div class="TagList__header">
         <el-button v-if="!isAdded" type="primary" title="Добавит тег" :icon="Plus" @click="add" />
         <el-form class="TagList__add" v-if="isAdded" @submit.prevent="click">
-          <el-input ref="inputRef" v-model.trim="inputValue" />
+          <el-input ref="inputRef" class="TagList__input" v-model.trim="inputValue" />
           <el-button type="primary" native-type="submit">Ok</el-button>
         </el-form>
       </div>
@@ -50,14 +50,22 @@ const click = () => {
   @include list;
   &__main {
     display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    align-content: flex-start;
+    overflow-x: auto;
+    @include no-scroll-bar;
+    gap: 10px;
+    align-items: center;
     background-color: $color-bg;
+  }
+  &__input {
+
+  }
+  &__header {
+    flex-shrink: 0;
   }
   &__add {
     display: flex;
     gap: 20px;
+
   }
 }
 </style>
