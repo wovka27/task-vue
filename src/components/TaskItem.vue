@@ -4,12 +4,13 @@ import { useTagsStore, useTasksStore } from '@/stores'
 import type { ITask } from '@/types'
 import { setTasks } from '@/services/storage'
 import {ElInput} from "element-plus";
+import { Delete } from '@element-plus/icons-vue'
 
 const props = defineProps<{ task: ITask }>()
 const emit = defineEmits(['update:tagValue', 'update:taskValue'])
 
 const { tags } = useTagsStore()
-const { tasks } = useTasksStore()
+const { tasks, deleteTask } = useTasksStore()
 const isChageText = ref<boolean>(false)
 const inputRef = ref<InstanceType<typeof ElInput>>()
 const model = computed<string>({
@@ -27,11 +28,8 @@ const modelFormInput = computed({
   }
 })
 
-watch(isChageText, (value) => {
-    if (value) {
-        inputRef.value?.input?.focus()
-    }
-})
+watch(isChageText, (value) => value && inputRef.value?.input?.focus())
+
 </script>
 <template>
   <div v-if="task" class="TaskItem">
@@ -45,14 +43,22 @@ watch(isChageText, (value) => {
         <el-button type="primary" @click="isChageText = false">OK</el-button>
       </el-form>
     </div>
+    <div class='TaskItem__delete'>
+      <el-button :icon='Delete' type='danger' @click='deleteTask(task.id)'/>
+    </div>
   </div>
 </template>
 
 <style lang="scss">
 .TaskItem {
   height: max-content;
+  @include shadow;
+  overflow: hidden;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 10px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(10, 1fr);
   gap: 20px;
   &__form {
     display: flex;
@@ -60,6 +66,7 @@ watch(isChageText, (value) => {
     gap: 10px;
   }
   &__tag {
+    grid-column: span 2;
     .el-input__wrapper {
       background-color: #f8f8f8;
       input {
@@ -67,15 +74,29 @@ watch(isChageText, (value) => {
     }
   }
   &__text {
+    .el-text:empty {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
     &.noTag {
-      grid-column: span 3;
+      grid-column: span 9;
     }
     line-height: 25px;
-    grid-column: span 2;
+    grid-column: span 7;
     border-radius: 8px;
     background-color: #fff;
-    padding: 5px;
-    @include shadow;
+  }
+
+  &__delete {
+    transition: transform .3s ease;
+    transform: translateX(200%);
+    grid-column: span 1;
+  }
+  &:hover {
+    .TaskItem__delete {
+      transform: translateX(0);
+    }
   }
 }
 </style>

@@ -13,6 +13,8 @@ const getData = <T>(key: DataEnum) => {
 }
 const setData: SetDataType = (key, value) => localStorage.setItem(key, JSON.stringify(value))
 
+export const deleteAll = () => Object.values(DataEnum).forEach(item => localStorage.removeItem(item))
+
 export const getTags = () => getData<ITag>(DataEnum.TAGS)
 export const setTags = (tags: ITag[]) => setData(DataEnum.TAGS, tags)
 

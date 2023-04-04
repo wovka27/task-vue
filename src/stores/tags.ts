@@ -6,7 +6,7 @@ import type { ITagStore } from '@/types/stores'
 
 export const useTagsStore = defineStore('tags', (): ITagStore => {
   const data: Ref<ITag[]> = ref(getTags())
-  const selectedData: Ref<ITag | undefined> = ref()
+  const selectedData: Ref<ITag | null> = ref(null)
   const tags: ITagStore['tags'] = computed(() => data)
   const selectedTag: ITagStore['selectedTag'] = computed(() => selectedData)
 
@@ -16,7 +16,7 @@ export const useTagsStore = defineStore('tags', (): ITagStore => {
   }
 
   const getSelectedData = () => {
-    selectedData.value = data.value.find((item) => item.selected)
+    selectedData.value = data.value.find((item) => item.selected) ?? null
   }
 
   const deleteTag: ITagStore['deleteTag'] = (value) => {
@@ -33,7 +33,7 @@ export const useTagsStore = defineStore('tags', (): ITagStore => {
   }
 
   const clearSelectedTag: ITagStore['clearSelectedTag'] = () => {
-    selectedData.value = undefined
+    selectedData.value = null
   }
 
   const selectTag: ITagStore['selectTag'] = (value) => {

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { reactive, ref, watch } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 import { useTagsStore, useTasksStore } from '@/stores'
 import type { FormInstance, FormRules } from 'element-plus'
 
@@ -14,11 +14,15 @@ const form = reactive({
 const rules = reactive<FormRules>({
   input: [{ required: true, message: 'Хули не заполнил?' }]
 })
+const taskValue = computed(() =>
+  selectedTag.value ? form.input.split(' ').slice(1, form.input.length).join(' ') : form.input
+)
 const submit = async (formRef: FormInstance | undefined) => {
   addTask({
     tag: selectedTag.value?.value ?? '',
-    value: form.input.split(' ').slice(1, form.input.length).join(' ')
+    value: taskValue.value
   })
+
   form.input = ''
   clearSelectedTag()
 }
@@ -47,7 +51,7 @@ watch(selectedTag, (value) => {
       <el-form-item required prop="input">
         <el-input class="TaskForm__input" v-model="form.input" resize="none" :rows="5" type="textarea" />
       </el-form-item>
-      <el-button :disabled='!form.input.length' type="success" native-type="submit">Добавить</el-button>
+      <el-button :disabled="!form.input.length" type="success" native-type="submit">Добавить</el-button>
     </div>
   </el-form>
 </template>

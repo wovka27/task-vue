@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import TaskList from '@/components/TaskList.vue'
 import TagList from '@/components/TagList.vue'
-import TaskPreview from '@/components/TaskPreview.vue'
 import TaskForm from '@/components/TaskForm.vue'
+import TaskComponent from '@/components/TaskComponent.vue'
 
-const cells = [TaskForm, TaskList, TagList, TaskPreview]
+const cells = [TaskForm, TaskComponent, TagList]
 </script>
 
 <template>
@@ -27,8 +26,8 @@ const cells = [TaskForm, TaskList, TagList, TaskPreview]
     'bc'
     'bc'
     'bc'
-    'de'
-    'de'
+    'bc'
+    'bc'
     'cd'
     'ab'
     'ab';
@@ -50,10 +49,6 @@ const cells = [TaskForm, TaskList, TagList, TaskPreview]
 
     &:nth-child(3) {
       grid-area: cd;
-    }
-
-    &:nth-child(4) {
-      grid-area: de;
     }
   }
 }
