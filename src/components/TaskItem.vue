@@ -38,7 +38,7 @@ watch(isChageText, (value) => value && inputRef.value?.input?.focus())
     </el-select>
     <div class="TaskItem__text" :class="{ noTag: !task.tag }">
       <el-text v-if="!isChageText" @click="isChageText = true">{{ task.value }}</el-text>
-      <el-form class="TaskItem__form" v-if="isChageText" @submit.prevent="isChageText = false">
+      <el-form @blur="isChageText = false" class="TaskItem__form" v-if="isChageText" @submit.prevent="isChageText = false">
         <el-input ref="inputRef" rows="3" type="textarea" v-model="modelFormInput" />
         <el-button type="primary" native-type="submit">OK</el-button>
       </el-form>
