@@ -29,7 +29,7 @@ const click = () => {
       <div class="TagList__header">
         <el-button v-if="!isAdded" type="primary" title="Добавит тег" :icon="Plus" @click="add" />
         <el-form class="TagList__add" v-if="isAdded" @submit.prevent="click">
-          <el-input ref="inputRef" class="TagList__input" v-model.trim="inputValue" />
+          <el-input ref="inputRef" class="TagList__input" v-model.trim="inputValue" @click='inputRef!.input!.focus()'/>
           <el-button type="primary" native-type="submit">Ok</el-button>
         </el-form>
       </div>

@@ -8,13 +8,15 @@ const { tasks } = useTasksStore()
 <template>
   <div class="TaskList">
     <div class="TaskList__main">
-      <TaskItem
-        v-for="task of tasks"
-        :key="task.id"
-        :task="task"
-        v-model:tag-value="task.tag"
-        v-model:task-value="task.value"
-      />
+      <TransitionGroup name='hui'>
+        <TaskItem
+          v-for="task of tasks"
+          :key="task.id"
+          :task="task"
+          v-model:tag-value="task.tag"
+          v-model:task-value="task.value"
+        />
+      </TransitionGroup>
     </div>
   </div>
 </template>
@@ -22,6 +24,7 @@ const { tasks } = useTasksStore()
 <style lang="scss">
 .TaskList {
   @include list;
+  padding: 0!important;
   &__header {
   }
   &__main {
