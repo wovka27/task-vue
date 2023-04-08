@@ -5,9 +5,7 @@ import TaskPreview from '@/components/TaskPreview.vue'
 
 const activeTab = ref<string>('0')
 const contentRef = ref()
-const contentTransformValue = computed(() =>
-  activeTab.value === '0' ? 0 : -contentRef.value.children[0].children[0].clientWidth
-)
+const contentTransformValue = computed(() => -(contentRef.value?.clientWidth * +activeTab.value) + 'px')
 </script>
 
 <template>
@@ -19,10 +17,7 @@ const contentTransformValue = computed(() =>
       </el-tabs>
     </div>
     <div ref="contentRef" class="TaskComponent__section">
-      <div
-        class="TaskComponent__section-inner-wrapper"
-        :style="`transform: translateX(${contentTransformValue === 0 ? '0' : contentTransformValue + 'px'})`"
-      >
+      <div class="TaskComponent__section-inner-wrapper" :style="`transform: translateX(${contentTransformValue})`">
         <div class="TaskComponent__content">
           <TaskList />
         </div>

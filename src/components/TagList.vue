@@ -29,7 +29,7 @@ const click = () => {
       <div class="TagList__header">
         <el-button v-if="!isAdded" type="primary" title="Добавит тег" :icon="Plus" @click="add" />
         <el-form class="TagList__add" v-if="isAdded" @submit.prevent="click">
-          <el-input ref="inputRef" class="TagList__input" v-model.trim="inputValue" @click='inputRef!.input!.focus()'/>
+          <el-input ref="inputRef" class="TagList__input" v-model.trim="inputValue" @click="inputRef!.input!.focus()" />
           <el-button type="primary" native-type="submit">Ok</el-button>
         </el-form>
       </div>
@@ -37,7 +37,7 @@ const click = () => {
         v-for="tag of tags"
         :key="tag.value"
         :value="tag.label"
-        :selected='tag.selected'
+        :selected="tag.selected"
         @close="deleteTag(tag.label)"
         @click.passive="selectTag(tag.label)"
       />
@@ -57,7 +57,6 @@ const click = () => {
     background-color: $color-bg;
   }
   &__input {
-
   }
   &__header {
     flex-shrink: 0;
@@ -65,7 +64,6 @@ const click = () => {
   &__add {
     display: flex;
     gap: 20px;
-
   }
 }
 </style>
