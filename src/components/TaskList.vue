@@ -22,6 +22,19 @@ const { tasks } = useTasksStore()
 </template>
 
 <style lang="scss">
+.hui-move,
+.hui-enter-active,
+.hui-leave-active {
+  transition: all 0.5s ease;
+}
+.hui-enter-from,
+.hui-leave-to {
+  opacity: 0;
+  transform: translateX(100%);
+}
+.hui-leave-active {
+  position: absolute;
+}
 .TaskList {
   @include list;
   padding: 0!important;
