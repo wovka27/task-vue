@@ -1,5 +1,5 @@
 import type {Directive} from "vue";
-import App from "@/App.vue";
+import type App from '@/App.vue'
 const checkNameBrowser = (name: string) => navigator.userAgent.toLocaleLowerCase().match(name)
 const directive: Directive = {
     mounted(el: HTMLElement & {savedScrollLeft: number; savedPageX: number | null}) {

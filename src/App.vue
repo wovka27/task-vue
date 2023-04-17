@@ -1,15 +1,11 @@
 <script setup lang="ts">
-import TagList from '@/components/TagList.vue'
-import TaskForm from '@/components/TaskForm.vue'
-import TaskComponent from '@/components/TaskComponent.vue'
-
-const cells = [TaskForm, TaskComponent, TagList]
+import Components from '@/components'
 </script>
 
 <template>
   <div class="Grid">
-    <div v-for="(cell, index) of cells" :key="index" class="Grid__cell">
-      <Component :is="cell" />
+    <div v-for="(Component, index) of Components" :key="index" class="Grid__cell">
+      <Component :is="Component" />
     </div>
   </div>
 </template>

@@ -10,7 +10,7 @@ export const useTasksStore = defineStore('tasks', (): ITasksStore => {
   const tasks: ITasksStore['tasks'] = computed(() => data)
 
   const addTask: ITasksStore['addTask'] = (task) => {
-    data.value.unshift({ ...task, id: Date.now() })
+    data.value.push({ ...task, id: Date.now() })
     setTasks(data.value)
   }
 
