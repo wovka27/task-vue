@@ -12,12 +12,15 @@ const form = reactive({
   input: inputValue
 })
 const rules = reactive<FormRules>({
-  input: [{ required: true, message: 'Хули не заполнил?' }]
+  input: [
+    { required: true, message: 'Хули не заполнил?' },
+    { min: 10, message: 'Хули так мало' }
+  ]
 })
 const taskValue = computed(() =>
   selectedTag.value ? form.input.split(' ').slice(1, form.input.length).join(' ') : form.input
 )
-const submit = async (formRef: FormInstance | undefined) => {
+const submit = async (f: FormInstance | undefined) => {
   addTask({
     tag: selectedTag.value?.value ?? '',
     value: taskValue.value
@@ -46,7 +49,7 @@ watch(selectedTag, (value) => {
 </script>
 
 <template>
-  <el-form :rules="rules" :model="form" class="TaskForm" @submit.prevent="submit(formRef)">
+  <el-form size="large" status-icon :rules="rules" :model="form" class="TaskForm" @submit.prevent="submit(formRef)">
     <div class="TaskForm__inner-wrapper">
       <el-form-item required prop="input">
         <el-input class="TaskForm__input" v-model="form.input" resize="none" :rows="5" type="textarea" />
