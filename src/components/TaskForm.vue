@@ -21,16 +21,21 @@ const taskValue = computed(() =>
   selectedTag.value ? form.input.split(' ').slice(1, form.input.length).join(' ') : form.input
 )
 const submit = async (f: FormInstance | undefined) => {
-  addTask({
-    tag: selectedTag.value?.value ?? '',
-    value: taskValue.value
-  })
+  if (!f) return
+  await f.validate((isValid) => {
+    if (isValid) {
+      addTask({
+        tag: selectedTag.value?.value ?? '',
+        value: taskValue.value
+      })
 
-  form.input = ''
-  clearSelectedTag()
+      form.input = ''
+      clearSelectedTag()
+    }
+  })
 }
 
-const regExp = /(?<=\{)(\S+)(?=\})/gm
+const regExp = /(?<=\{)(\S+)(?=\})/g
 
 watch(inputValue, (value) => {
   const matches = value.match(regExp)
@@ -49,7 +54,15 @@ watch(selectedTag, (value) => {
 </script>
 
 <template>
-  <el-form size="large" status-icon :rules="rules" :model="form" class="TaskForm" @submit.prevent="submit(formRef)">
+  <el-form
+    size="large"
+    status-icon
+    ref="formRef"
+    :rules="rules"
+    :model="form"
+    class="TaskForm"
+    @submit.prevent="submit(formRef)"
+  >
     <div class="TaskForm__inner-wrapper">
       <el-form-item required prop="input">
         <el-input class="TaskForm__input" v-model="form.input" resize="none" :rows="5" type="textarea" />
