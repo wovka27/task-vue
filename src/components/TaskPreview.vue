@@ -1,19 +1,23 @@
 <script lang="ts" setup>
 import { getDate, parseOrStringifyTagValue } from '@/utils/helpers'
 import { CopyDocument } from '@element-plus/icons-vue'
-import { computed, ref } from 'vue'
-import { useTasksStore } from '@/stores'
+import {computed, ref} from 'vue'
+import {useDocumentVisible, useTasksStore} from '@/stores'
 import { copy } from '@/utils'
-import type { ITag } from '@/types'
 
 const { tasks } = useTasksStore()
+const {type} = useDocumentVisible()
 
-const weekday = getDate('weekday')
+const weekday = computed(() => type ? getDate('weekday') : getDate('weekday'))
 const textRef = ref()
 
 const getTextValue = (tag: string, value: string) => {
   return !tag ? `- ${value}` : `- ${parseOrStringifyTagValue('str', tag)}: ${value}`
 }
+const handle = (event: Event) => {
+
+}
+
 </script>
 
 <template>

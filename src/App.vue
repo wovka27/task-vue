@@ -1,5 +1,18 @@
 <script setup lang="ts">
 import Components from '@/components'
+import {onMounted, onUnmounted} from "vue";
+import {useDocumentVisible} from "@/stores";
+
+const {setType} = useDocumentVisible()
+const handle = () => setType(document.visibilityState)
+
+onMounted(() => {
+  document.addEventListener('visibilitychange', handle)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('visibilitychange', handle)
+})
 </script>
 
 <template>
