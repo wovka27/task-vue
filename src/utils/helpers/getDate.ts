@@ -1,10 +1,4 @@
-export const getDate = (value: 'weekday' | 'today'): string | null => {
-  switch (value) {
-    case 'today':
-      return new Intl.DateTimeFormat('ru').format()
-    case 'weekday':
-      return new Intl.DateTimeFormat('ru', { weekday: 'long' }).format()
-    default:
-      return null
-  }
+export const getDate = (): string => {
+  const res = new Intl.DateTimeFormat('ru', { weekday: 'long' }).format()
+  return res.charAt(0).toUpperCase() + res.slice(1)
 }

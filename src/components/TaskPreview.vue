@@ -8,16 +8,12 @@ import { copy } from '@/utils'
 const { tasks } = useTasksStore()
 const {type} = useDocumentVisible()
 
-const weekday = computed(() => type ? getDate('weekday') : getDate('weekday'))
+const weekday = getDate()
 const textRef = ref()
 
 const getTextValue = (tag: string, value: string) => {
   return !tag ? `- ${value}` : `- ${parseOrStringifyTagValue('str', tag)}: ${value}`
 }
-const handle = (event: Event) => {
-
-}
-
 </script>
 
 <template>
